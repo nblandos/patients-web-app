@@ -3,26 +3,40 @@ package uk.ac.ucl.model;
 import java.util.ArrayList;
 
 public class Column {
-    public void addColumn(){
+    private String name;
+    private ArrayList<String> rows;
 
-    }
-    public ArrayList<String> getColumnNames() {
-
-    }
-
-    public int getRowCount() {
-
+    public Column(String name) {
+        this.name = name;
+        this.rows = new ArrayList<>();
     }
 
-    public int getValue(String columnName, int row) {
-
+    public String getName() {
+        return name;
     }
 
-    public void putValue(String columnName, int row, String value) {
-
+    public int getSize() {
+        return rows.size();
     }
 
-    public void addValue(String columnName, String Value) {
+    public String getRowValue(int index) {
+        if (index >= 0 && index < rows.size()) {
+            return rows.get(index);
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+    }
 
+    public void setRowValue(int index, String value) {
+        if (index >= 0 && index < rows.size()) {
+            rows.set(index, value);
+        } else {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+    }
+
+    public void addRowValue(String value) {
+        rows.add(value);
     }
 }
+
