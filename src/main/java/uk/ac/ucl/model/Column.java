@@ -1,10 +1,11 @@
 package uk.ac.ucl.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Column {
     private String name;
-    private ArrayList<String> rows;
+    private List<String> rows;
 
     public Column(String name) {
         this.name = name;
