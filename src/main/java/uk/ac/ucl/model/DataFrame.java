@@ -34,7 +34,7 @@ public class DataFrame {
         if (column != null) {
             return column.getRowValue(row);
         } else {
-            throw new IllegalArgumentException("Column " + columnName + " does not exist");
+            throw new IllegalArgumentException("Column '" + columnName + "' does not exist");
         }
     }
 
@@ -43,7 +43,7 @@ public class DataFrame {
         if (column != null) {
             column.setRowValue(row, value);
         } else {
-            throw new IllegalArgumentException("Column " + columnName + " does not exist");
+            throw new IllegalArgumentException("Column '" + columnName + "' does not exist");
         }
     }
 
@@ -52,7 +52,7 @@ public class DataFrame {
         if (column != null) {
             column.addRowValue(value);
         } else {
-            throw new IllegalArgumentException("Column " + columnName + " does not exist");
+            throw new IllegalArgumentException("Column '" + columnName + "' does not exist");
         }
     }
 }

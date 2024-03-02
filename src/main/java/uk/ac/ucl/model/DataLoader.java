@@ -17,10 +17,11 @@ public class DataLoader {
     }
 
     public DataFrame loadData() {
+        //
         DataFrame dataFrame = new DataFrame();
 
         try (Reader reader = new FileReader(filePath);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT))
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader()))
         {
             String[] columnNames = csvParser.getHeaderMap().keySet().toArray(new String[0]);
             for (String columnName : columnNames) {
