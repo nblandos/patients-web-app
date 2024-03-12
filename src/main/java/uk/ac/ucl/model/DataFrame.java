@@ -78,4 +78,15 @@ public class DataFrame {
         String lastName = getValue("LAST", row);
         return firstName + " " + lastName;
     }
+
+    public int getRowIndexFromFullName(String fullName) {
+        int rowIndex = -1;
+        for (int i = 0; i < getRowCount(); i++) {
+            if (getFullName(i).equals(fullName)) {
+                rowIndex = i;
+                break;
+            }
+        }
+        return rowIndex;
+    }
 }

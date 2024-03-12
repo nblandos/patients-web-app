@@ -1,4 +1,5 @@
 <%@ page import="java.util.List" %>
+<%@ page import="java.net.URLEncoder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -19,8 +20,10 @@
       <%
         for (String patient : patients)
         {
+          String encodedPatientName = URLEncoder.encode(patient, "UTF-8");
+          String href = "patientPage.html?patient=" + encodedPatientName;
       %>
-      <li><%=patient%></li>
+      <li><a href="<%=href%>"><%=patient%></a>
      <% }
     } else
     {%>

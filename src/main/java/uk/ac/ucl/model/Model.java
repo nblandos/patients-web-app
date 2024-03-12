@@ -1,8 +1,6 @@
 package uk.ac.ucl.model;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Model
 {
@@ -32,6 +30,27 @@ public class Model
 
     return patientNames;
   }
+
+  public Map<String, String> getPatientDetails(String patientName) {
+    Map<String, String> patientDetails = new HashMap<>();
+
+    int rowIndex = dataFrame.getRowIndexFromFullName(patientName);
+
+    if (rowIndex != -1) {
+      for (String columnName : dataFrame.getColumnNames()) {
+        String value = dataFrame.getValue(columnName, rowIndex);
+        if (value.isEmpty()) {
+          value = "N/A";
+        }
+        patientDetails.put(columnName, value);
+      }
+    }
+    System.out.println(patientName);
+
+    return patientDetails;
+  }
+
+
 
   public List<String> searchFor(String keyword)
   {
