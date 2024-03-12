@@ -17,7 +17,6 @@ public class DataLoader {
     }
 
     public DataFrame loadData() {
-        //
         DataFrame dataFrame = new DataFrame();
 
         try (Reader reader = new FileReader(filePath);
@@ -36,6 +35,7 @@ public class DataLoader {
             }
         } catch (IOException e)
         {
+            // Handle opening file if it doesn't exist, program shouldn't crash
             e.printStackTrace();
         }
 

@@ -55,4 +55,27 @@ public class DataFrame {
             throw new IllegalArgumentException("Column '" + columnName + "' does not exist");
         }
     }
+
+    public List<String> searchByColumnValue(String columnName, String keyword) {
+        Column column = columns.get(columnName);
+        if (column != null) {
+            List<String> matchingRows = new ArrayList<>();
+            for (int row = 0; row < column.getSize(); row++) {
+                String value = column.getRowValue(row);
+                if (value.toLowerCase().contains(keyword.toLowerCase())) {
+                    matchingRows.add(getFullName(row));
+                }
+            }
+            return matchingRows;
+        }
+        else {
+            throw new IllegalArgumentException("Column '" + columnName + "' does not exist");
+        }
+    }
+
+    public String getFullName(int row) {
+        String firstName = getValue("FIRST", row);
+        String lastName = getValue("LAST", row);
+        return firstName + " " + lastName;
+    }
 }

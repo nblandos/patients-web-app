@@ -1,5 +1,6 @@
 package uk.ac.ucl.model;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,7 @@ public class Model
     List<String> patientNames = new ArrayList<>();
 
     for (int i = 0; i < dataFrame.getRowCount(); i++) {
-      String firstName = dataFrame.getValue("FIRST", i);
-      String lastName = dataFrame.getValue("LAST", i);
-      String fullName = firstName + " " + lastName;
+      String fullName = dataFrame.getFullName(i);
       patientNames.add(fullName);
     }
 
@@ -36,8 +35,20 @@ public class Model
 
   public List<String> searchFor(String keyword)
   {
-    // TODO
-    return new ArrayList<>();
-//    return dataFrame.searchByColumnValue("PatientName", keyword);
+    List<String> searchResults = new ArrayList<>();
+    List<String> searchableColumns = Arrays.asList("FIRST", "LAST"); // searches in these columns
+    for (String columnName : searchableColumns) {
+      List<String> matchingResults = dataFrame.searchByColumnValue(columnName, keyword);
+
+      for (String result : matchingResults) { // merges search results
+        if (!searchResults.contains(result)) {
+          searchResults.add(result);
+        }
+      }
+    }
+
+    return searchResults;
+
   }
+
 }
