@@ -19,18 +19,11 @@ public class ViewPatientPageServlet extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        System.out.println("Patient Name received: ");
-
         String patientName = request.getParameter("patient");
-
-        System.out.println("Patient Name received: " + patientName);
 
 
         Model model = ModelFactory.getModel();
         Map<String, String> patientDetails = model.getPatientDetails(patientName);
-
-        System.out.println("Patient details from Model: " + patientDetails);
-
 
         request.setAttribute("patientDetails", patientDetails);
 

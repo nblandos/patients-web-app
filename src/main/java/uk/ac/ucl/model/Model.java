@@ -4,6 +4,11 @@ import java.util.*;
 
 public class Model
 {
+  // TODO: search data based on selected column name (drop down to select column name then return names that match)
+  // TODO: in display patient list add filters to sort by age/location
+  // TODO: requirements 8 & 9 possibly 10
+  // TODO: use bootstrap and css to make it look nice
+
   private DataFrame dataFrame;
 
   public Model() {
@@ -45,12 +50,8 @@ public class Model
         patientDetails.put(columnName, value);
       }
     }
-    System.out.println(patientName);
-
     return patientDetails;
   }
-
-
 
   public List<String> searchFor(String keyword)
   {
