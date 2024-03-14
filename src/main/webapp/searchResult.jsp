@@ -13,7 +13,7 @@
   <h1>Search Result</h1>
   <%
     List<String> patients = (List<String>) request.getAttribute("result");
-    if (patients.size() !=0)
+    if (!patients.isEmpty())
     {
     %>
     <ul>

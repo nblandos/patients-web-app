@@ -62,9 +62,13 @@ public class DataFrame {
             List<String> matchingRows = new ArrayList<>();
             for (int row = 0; row < column.getSize(); row++) {
                 String value = column.getRowValue(row);
-                if (value.toLowerCase().contains(keyword.toLowerCase())) {
-                    matchingRows.add(getFullName(row));
+                if (!value.isEmpty()) {
+                    // checks if search string contains column value or column value contains search string
+                    if (value.toLowerCase().contains(keyword.toLowerCase()) || keyword.toLowerCase().contains(value.toLowerCase())) {
+                        matchingRows.add(getFullName(row));
+                    }
                 }
+
             }
             return matchingRows;
         }

@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Model
 {
-  // TODO: search data based on selected column name (drop down to select column name then return names that match)
   // TODO: in display patient list add filters to sort by age/location
   // TODO: requirements 8 & 9 possibly 10
   // TODO: use bootstrap and css to make it look nice
@@ -53,10 +52,20 @@ public class Model
     return patientDetails;
   }
 
-  public List<String> searchFor(String keyword)
+  public List<String> searchFor(String keyword, String searchColumn)
   {
     List<String> searchResults = new ArrayList<>();
-    List<String> searchableColumns = Arrays.asList("FIRST", "LAST"); // searches in these columns
+    List<String> searchableColumns = switch (searchColumn) {
+        case "name" -> Arrays.asList("FIRST", "LAST"); // searches in these columns
+        case "id" -> List.of("ID");
+        case "ssn" -> List.of("SSN");
+        case "drivers" -> List.of("DRIVERS");
+        case "race-ethnicity" -> Arrays.asList("RACE", "ETHNICITY");
+        case "birthplace" -> List.of("BIRTHPLACE");
+        case "location" -> Arrays.asList("ADDRESS", "CITY", "STATE", "ZIP");
+        default -> List.of();
+    };
+
     for (String columnName : searchableColumns) {
       List<String> matchingResults = dataFrame.searchByColumnValue(columnName, keyword);
 

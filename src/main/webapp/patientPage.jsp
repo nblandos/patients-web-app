@@ -8,12 +8,13 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="main">
-    <h2>Patient Details</h2>
 
     <%
         Map<String, String> patientDetails = (Map<String, String>) request.getAttribute("patientDetails");
         if (patientDetails != null && !patientDetails.isEmpty()) {
     %>
+    <h2><%= patientDetails.get("FIRST") + " " + patientDetails.get("LAST")%></h2>
+
     <table>
         <tr> <th>ID:</th> <td><%= patientDetails.get("ID") %></td> </tr>
         <tr> <th>Birth Date:</th> <td><%= patientDetails.get("BIRTHDATE") %></td> </tr>
@@ -22,8 +23,6 @@
         <tr> <th>Drivers:</th> <td><%= patientDetails.get("DRIVERS") %></td> </tr>
         <tr> <th>Passport:</th> <td><%= patientDetails.get("PASSPORT") %></td> </tr>
         <tr> <th>Prefix:</th> <td><%= patientDetails.get("PREFIX") %></td> </tr>
-        <tr> <th>First Name:</th> <td><%= patientDetails.get("FIRST") %></td> </tr>
-        <tr> <th>Last Name:</th> <td><%= patientDetails.get("LAST") %></td> </tr>
         <tr> <th>Suffix:</th> <td><%= patientDetails.get("SUFFIX") %></td> </tr>
         <tr> <th>Maiden:</th> <td><%= patientDetails.get("MAIDEN") %></td> </tr>
         <tr> <th>Marital:</th> <td><%= patientDetails.get("MARITAL") %></td> </tr>

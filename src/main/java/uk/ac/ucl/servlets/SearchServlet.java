@@ -19,13 +19,15 @@ import java.util.List;
 @WebServlet("/runsearch.html")
 public class SearchServlet extends HttpServlet
 {
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
   {
     // Use the model to do the search and put the results into the request object sent to the
     // Java Server Page used to display the results.
-
     Model model = ModelFactory.getModel();
-    List<String> searchResult = model.searchFor(request.getParameter("searchstring"));
+    String searchString = request.getParameter("search-string");
+    String searchType = request.getParameter("search-type");
+    List<String> searchResult = model.searchFor(searchString, searchType);
+
     request.setAttribute("result", searchResult);
 
     // Invoke the JSP page.

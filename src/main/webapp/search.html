@@ -7,9 +7,21 @@
 <div class="main">
   <h1>Search</h1>
   <form method="POST" action="/runsearch.html">
-    <input type="text" name="searchstring" placeholder="Enter search keyword here"/>
+    <input type="text" name="search-string" placeholder="Enter search keyword here"/>
     <input type="submit" value="Search"/>
+
+    <label for="search-type">Search by:</label>
+    <select name="search-type" id="search-type">
+      <option value="name">Name</option>
+      <option value="id">ID</option>
+      <option value="ssn">SSN</option>
+      <option value="drivers">Drivers</option>
+      <option value="race-ethnicity">Race/Ethnicity</option>
+      <option value="birthplace">Birthplace</option>
+      <option value="location">Location</option>
+    </select>
   </form>
+
 </div>
 </body>
 </html>
