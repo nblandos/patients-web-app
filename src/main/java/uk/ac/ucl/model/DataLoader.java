@@ -1,5 +1,6 @@
 package uk.ac.ucl.model;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -18,25 +19,35 @@ public class DataLoader {
 
     public DataFrame loadData() {
         DataFrame dataFrame = new DataFrame();
+        Reader reader = null;
 
-        try (Reader reader = new FileReader(filePath);
-             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader()))
-        {
+        try {
+            reader = new FileReader(filePath);
+            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader());
             String[] columnNames = csvParser.getHeaderMap().keySet().toArray(new String[0]);
             for (String columnName : columnNames) {
                 dataFrame.addColumn(columnName);
             }
-
             for (CSVRecord csvRecord : csvParser)
             {
                 for (String columnName : columnNames) {
                     dataFrame.addValue(columnName, csvRecord.get(columnName));
                 }
             }
-        } catch (IOException e)
-        {
-            // Handle opening file if it doesn't exist, program shouldn't crash
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + filePath);
+            // return default data frame here
+        } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            // close file reader
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         return dataFrame;

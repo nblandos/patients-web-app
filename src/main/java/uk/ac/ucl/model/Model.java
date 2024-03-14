@@ -5,6 +5,7 @@ import java.util.*;
 public class Model
 {
   // TODO: in display patient list add filters to sort by age/location
+  // TODO: handle file not found exception better
   // TODO: requirements 8 & 9 possibly 10
   // TODO: use bootstrap and css to make it look nice
 
