@@ -12,6 +12,10 @@ import org.apache.commons.csv.CSVRecord;
 public class DataLoader {
 
     private String filePath;
+    private static final String[] DEFAULT_COLUMN_NAMES = {
+            "ID", "BIRTHDATE", "DEATHDATE", "SSN", "DRIVERS", "PASSPORT", "PREFIX", "FIRST", "LAST",
+            "SUFFIX", "MAIDEN", "MARITAL", "RACE", "ETHNICITY", "GENDER", "BIRTHPLACE", "ADDRESS", "CITY", "STATE", "ZIP"
+    };
 
     public DataLoader(String filePath) {
         this.filePath = filePath;
@@ -36,11 +40,13 @@ public class DataLoader {
             }
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
-            // return default data frame here
+            // If file not found, return empty data frame with default column names
+            for (String columnName : DEFAULT_COLUMN_NAMES) {
+                dataFrame.addColumn(columnName);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            // close file reader
             if (reader != null) {
                 try {
                     reader.close();

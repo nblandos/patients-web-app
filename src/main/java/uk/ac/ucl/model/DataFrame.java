@@ -68,7 +68,6 @@ public class DataFrame {
                         matchingRows.add(getFullName(row));
                     }
                 }
-
             }
             return matchingRows;
         }
@@ -78,15 +77,34 @@ public class DataFrame {
     }
 
     public String getFullName(int row) {
-        String firstName = getValue("FIRST", row);
-        String lastName = getValue("LAST", row);
-        return firstName + " " + lastName;
+        String firstName = "";
+        String lastName = "";
+
+        try {
+            firstName = getValue("FIRST", row);
+        } catch (IllegalArgumentException ignored) {
+        }
+
+        try {
+            lastName = getValue("LAST", row);
+        } catch (IllegalArgumentException ignored) {
+        }
+
+        if (firstName.isEmpty() && lastName.isEmpty()) {
+            return "N/A"; // neither column exists
+        } else if (firstName.isEmpty()) {
+            return lastName; // only "LAST" column exists
+        } else if (lastName.isEmpty()) {
+            return firstName; // only "FIRST" column exists
+        } else {
+            return firstName + " " + lastName; // both exist
+        }
     }
 
     public int getRowIndexFromFullName(String fullName) {
         int rowIndex = -1;
         for (int i = 0; i < getRowCount(); i++) {
-            if (getFullName(i).equals(fullName)) {
+            if (getFullName(i).equals(fullName) && !fullName.equals("N/A")) {
                 rowIndex = i;
                 break;
             }
