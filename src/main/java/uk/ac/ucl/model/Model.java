@@ -5,7 +5,6 @@ import java.util.*;
 public class Model
 {
   // TODO: in display patient list add filters to sort by age/location
-  // TODO: handle file not found exception better
   // TODO: requirements 8 & 9 possibly 10
   // TODO: use bootstrap and css to make it look nice
 
@@ -43,14 +42,23 @@ public class Model
 
     if (rowIndex != -1) {
       for (String columnName : dataFrame.getColumnNames()) {
-        String value = dataFrame.getValue(columnName, rowIndex);
-        if (value.isEmpty()) {
-          value = "N/A";
-        }
+        String value = getValueWithDefault(columnName, rowIndex);
         patientDetails.put(columnName, value);
       }
     }
     return patientDetails;
+  }
+
+  private String getValueWithDefault(String columnName, int row) {
+    try {
+      String value = dataFrame.getValue(columnName, row);
+      if (value != null && !value.isEmpty()) {
+        return value;
+      }
+    } catch (IllegalArgumentException e) {
+      // value is set to N/A if column doesn't exist or value is empty
+    }
+    return "N/A";
   }
 
   public List<String> searchFor(String keyword, String searchColumn)
@@ -68,9 +76,15 @@ public class Model
     };
 
     for (String columnName : searchableColumns) {
-      List<String> matchingResults = dataFrame.searchByColumnValue(columnName, keyword);
+      List<String> matchingResults;
+      try {
+        matchingResults = dataFrame.searchByColumnValue(columnName, keyword);
+      } catch (IllegalArgumentException e) {
+        // skip column if doesn't exist
+        matchingResults = new ArrayList<>();
+      }
 
-      for (String result : matchingResults) { // merges search results
+      for (String result : matchingResults) {
         if (!searchResults.contains(result)) {
           searchResults.add(result);
         }
