@@ -82,9 +82,9 @@
         <%
             // grouping logic
             for (Map.Entry<String, List<String>> group : patientData.entrySet()) {
+                int groupCount = group.getValue().size();
         %>
-        <h3><%= group.getKey() %>
-        </h3>
+        <h3><%= group.getKey() %> (<%= groupCount %>)</h3>
         <ul>
             <% for (String patientName : group.getValue()) {
                 String encodedPatientName = URLEncoder.encode(patientName, StandardCharsets.UTF_8);

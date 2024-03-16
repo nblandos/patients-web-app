@@ -6,7 +6,6 @@ import java.util.*;
 
 public class Model {
 
-    //TODO: Add count to grouping
     //TODO: Treat ID as primary key instead of full name
     //TODO: Add the ability to add a new patient row, edit an existing row, or delete a row. The data will need to be saved by writing out a new CSV file.
     /*TODO: Write a class JSONWriter that given a DataFrame writes out the data to a file in
