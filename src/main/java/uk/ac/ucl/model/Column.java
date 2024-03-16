@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Column {
-    private String name;
-    private List<String> rows;
+    private final String name;
+    private final List<String> rows;
 
     public Column(String name) {
         this.name = name;

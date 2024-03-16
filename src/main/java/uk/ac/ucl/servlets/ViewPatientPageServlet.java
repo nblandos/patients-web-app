@@ -14,10 +14,8 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/patientPage.html")
-public class ViewPatientPageServlet extends HttpServlet
-{
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+public class ViewPatientPageServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String patientName = request.getParameter("patient");
 
         Model model = ModelFactory.getModel();

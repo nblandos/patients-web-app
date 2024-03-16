@@ -1,12 +1,12 @@
 package uk.ac.ucl.model;
 
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 
 public class DataFrame {
-    private Map<String, Column> columns;
+    private final Map<String, Column> columns;
 
     public DataFrame() {
         columns = new HashMap<>();

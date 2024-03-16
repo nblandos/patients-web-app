@@ -1,21 +1,21 @@
 package uk.ac.ucl.model;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-
 public class DataLoader {
 
-    private String filePath;
     private static final String[] DEFAULT_COLUMN_NAMES = {
             "ID", "BIRTHDATE", "DEATHDATE", "SSN", "DRIVERS", "PASSPORT", "PREFIX", "FIRST", "LAST",
             "SUFFIX", "MAIDEN", "MARITAL", "RACE", "ETHNICITY", "GENDER", "BIRTHPLACE", "ADDRESS", "CITY", "STATE", "ZIP"
     };
+    private final String filePath;
 
     public DataLoader(String filePath) {
         this.filePath = filePath;
@@ -32,8 +32,7 @@ public class DataLoader {
             for (String columnName : columnNames) {
                 dataFrame.addColumn(columnName);
             }
-            for (CSVRecord csvRecord : csvParser)
-            {
+            for (CSVRecord csvRecord : csvParser) {
                 for (String columnName : columnNames) {
                     dataFrame.addValue(columnName, csvRecord.get(columnName));
                 }

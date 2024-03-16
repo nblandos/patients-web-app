@@ -17,22 +17,20 @@ import java.util.List;
 // The url http://localhost:8080/runsearch.html is mapped to calling doPost on the servlet object.
 // The servlet object is created automatically, you just provide the class.
 @WebServlet("/runsearch.html")
-public class SearchResultServlet extends HttpServlet
-{
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-  {
-    // Use the model to do the search and put the results into the request object sent to the
-    // Java Server Page used to display the results.
-    Model model = ModelFactory.getModel();
-    String searchString = request.getParameter("search-string");
-    String searchType = request.getParameter("search-type");
-    List<String> searchResult = model.searchFor(searchString, searchType);
+public class SearchResultServlet extends HttpServlet {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Use the model to do the search and put the results into the request object sent to the
+        // Java Server Page used to display the results.
+        Model model = ModelFactory.getModel();
+        String searchString = request.getParameter("search-string");
+        String searchType = request.getParameter("search-type");
+        List<String> searchResult = model.searchFor(searchString, searchType);
 
-    request.setAttribute("result", searchResult);
+        request.setAttribute("result", searchResult);
 
-    // Invoke the JSP page.
-    ServletContext context = getServletContext();
-    RequestDispatcher dispatch = context.getRequestDispatcher("/searchResult.jsp");
-    dispatch.forward(request, response);
-  }
+        // Invoke the JSP page.
+        ServletContext context = getServletContext();
+        RequestDispatcher dispatch = context.getRequestDispatcher("/searchResult.jsp");
+        dispatch.forward(request, response);
+    }
 }
