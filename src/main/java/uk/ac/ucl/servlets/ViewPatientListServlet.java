@@ -25,7 +25,8 @@ public class ViewPatientListServlet extends HttpServlet
     // Get the data from the model
     Model model = ModelFactory.getModel();
     String sortBy = request.getParameter("sort-by");
-    List<String> patientNames = model.getSortedPatientNames(sortBy);
+    boolean reverseOrder = request.getParameter("reverse-order") != null;
+    List<String> patientNames = model.getSortedPatientNames(sortBy, reverseOrder);
 
     // Then add the data to the request object that will be sent to the Java Server Page, so that
     // the JSP can access the data (a Java data structure).

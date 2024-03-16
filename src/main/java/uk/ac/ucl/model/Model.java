@@ -96,7 +96,7 @@ public class Model
     return patientNames;
   }
 
-  public List<String> getSortedPatientNames(String sortBy) {
+  public List<String> getSortedPatientNames(String sortBy, boolean reverseOrder) {
     List<String> patientNames = getPatientNames();
 
     if (Objects.equals(sortBy, "first-name")) {
@@ -106,6 +106,11 @@ public class Model
     } else if (Objects.equals(sortBy, "age")) {
       Collections.sort(patientNames, new AgeComparator(dataFrame));
     }
+
+    if (reverseOrder) {
+      Collections.reverse(patientNames);
+    }
+
     return patientNames;
   }
 

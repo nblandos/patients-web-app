@@ -19,8 +19,11 @@
       <option value="last-name" <% if (request.getParameter("sort-by") != null && request.getParameter("sort-by").equals("last-name")) { %> selected <% } %>>Last Name</option>
       <option value="age" <% if (request.getParameter("sort-by") != null && request.getParameter("sort-by").equals("age")) { %> selected <% } %>>Age</option>
     </select>
+    <label for="reverse-order">Reverse Order:</label>
+    <input type="checkbox" id="reverse-order" name="reverse-order" value="false" <% if (request.getParameter("reverse-order") != null) { %> checked <% } %> >
     <button type="submit">Sort</button>
   </form>
+
   <ul>
     <%
       List<String> patientNames = (List<String>) request.getAttribute("patientNames");
