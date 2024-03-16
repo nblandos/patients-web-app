@@ -70,8 +70,7 @@ public class DataFrame {
                 }
             }
             return matchingRows;
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Column '" + columnName + "' does not exist");
         }
     }

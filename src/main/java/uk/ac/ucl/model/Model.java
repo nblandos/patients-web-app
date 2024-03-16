@@ -1,5 +1,7 @@
 package uk.ac.ucl.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Model
@@ -21,18 +23,6 @@ public class Model
   public void loadDataFromCSV(String filePath) {
     DataLoader dataLoader = new DataLoader(filePath);
     this.dataFrame = dataLoader.loadData();
-  }
-
-  public List<String> getPatientNames()
-  {
-    List<String> patientNames = new ArrayList<>();
-
-    for (int i = 0; i < dataFrame.getRowCount(); i++) {
-      String fullName = dataFrame.getFullName(i);
-      patientNames.add(fullName);
-    }
-
-    return patientNames;
   }
 
   public Map<String, String> getPatientDetails(String patientName) {
@@ -92,7 +82,79 @@ public class Model
     }
 
     return searchResults;
-
   }
+
+  private List<String> getPatientNames()
+  {
+    List<String> patientNames = new ArrayList<>();
+
+    for (int i = 0; i < dataFrame.getRowCount(); i++) {
+      String fullName = dataFrame.getFullName(i);
+      patientNames.add(fullName);
+    }
+
+    return patientNames;
+  }
+
+  public List<String> getSortedPatientNames(String sortBy) {
+    List<String> patientNames = getPatientNames();
+
+    if (Objects.equals(sortBy, "first-name")) {
+      Collections.sort(patientNames, new FirstNameComparator(dataFrame));
+    } else if (Objects.equals(sortBy, "last-name")) {
+      Collections.sort(patientNames, new LastNameComparator(dataFrame));
+    } else if (Objects.equals(sortBy, "age")) {
+      Collections.sort(patientNames, new AgeComparator(dataFrame));
+    }
+    return patientNames;
+  }
+
+  private record FirstNameComparator(DataFrame dataFrame) implements Comparator<String> {
+    @Override
+      public int compare(String patientName1, String patientName2) {
+        int row1 = dataFrame.getRowIndexFromFullName(patientName1);
+        int row2 = dataFrame.getRowIndexFromFullName(patientName2);
+
+        String firstName1 = dataFrame.getValue("FIRST", row1);
+        String firstName2 = dataFrame.getValue("FIRST", row2);
+
+        return firstName1.compareToIgnoreCase(firstName2);
+      }
+    }
+
+  private record LastNameComparator(DataFrame dataFrame) implements Comparator<String> {
+    @Override
+    public int compare(String patientName1, String patientName2) {
+      int row1 = dataFrame.getRowIndexFromFullName(patientName1);
+      int row2 = dataFrame.getRowIndexFromFullName(patientName2);
+
+      String lastName1 = dataFrame.getValue("LAST", row1);
+      String lastName2 = dataFrame.getValue("LAST", row2);
+
+      return lastName1.compareToIgnoreCase(lastName2);
+    }
+  }
+
+  private record AgeComparator(DataFrame dataFrame) implements Comparator<String> {
+    @Override
+      public int compare(String patientName1, String patientName2) {
+        int row1 = dataFrame.getRowIndexFromFullName(patientName1);
+        int row2 = dataFrame.getRowIndexFromFullName(patientName2);
+
+        String strDateOfBirth1 = dataFrame.getValue("BIRTHDATE", row1);
+        String strDateOfBirth2 = dataFrame.getValue("BIRTHDATE", row2);
+
+        try {
+          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+          LocalDate dateOfBirth1 = LocalDate.parse(strDateOfBirth1, formatter);
+          LocalDate dateOfBirth2 = LocalDate.parse(strDateOfBirth2, formatter);
+
+          return dateOfBirth1.compareTo(dateOfBirth2);
+        } catch (NumberFormatException ex) {
+          return 0;
+        }
+      }
+    }
+
 
 }
