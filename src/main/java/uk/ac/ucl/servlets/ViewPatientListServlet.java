@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 // The servlet invoked to display a list of patients. Note that this data is just example data,
 // you replace it with your data.
@@ -26,7 +27,9 @@ public class ViewPatientListServlet extends HttpServlet
     Model model = ModelFactory.getModel();
     String sortBy = request.getParameter("sort-by");
     boolean reverseOrder = request.getParameter("reverse-order") != null;
-    List<String> patientNames = model.getSortedPatientNames(sortBy, reverseOrder);
+    String groupBy = request.getParameter("group-by");
+
+    Map<String, List<String>> patientNames = model.getSortedGroupedPatientNames(groupBy, sortBy, reverseOrder);
 
     // Then add the data to the request object that will be sent to the Java Server Page, so that
     // the JSP can access the data (a Java data structure).

@@ -40,7 +40,7 @@ public class DataLoader {
             }
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + filePath);
-            // If file not found, return empty data frame with default column names
+            // if file not found, return empty data frame with default column names
             for (String columnName : DEFAULT_COLUMN_NAMES) {
                 dataFrame.addColumn(columnName);
             }

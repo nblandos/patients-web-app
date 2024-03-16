@@ -110,4 +110,9 @@ public class DataFrame {
         }
         return rowIndex;
     }
+
+    public String getValueFromPatientName(String patientName, String columnName) {
+        int rowIndex = getRowIndexFromFullName(patientName);
+        return getValue(columnName, rowIndex);
+    }
 }

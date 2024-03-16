@@ -16,7 +16,7 @@
     <h2><%= patientDetails.get("FIRST") + " " + patientDetails.get("LAST")%></h2>
 
     <table>
-<%--Displays N/A instead of null if column name does not exist--%>
+<%--displays N/A instead of null if column name does not exist--%>
         <tr> <th>ID:</th> <td><%= patientDetails.get("ID") != null ? patientDetails.get("ID") : "N/A" %></td> </tr>
         <tr> <th>Birth Date:</th> <td><%= patientDetails.get("BIRTHDATE") != null ? patientDetails.get("BIRTHDATE") : "N/A" %></td> </tr>
         <tr> <th>Death Date:</th> <td><%= patientDetails.get("DEATHDATE") != null ? patientDetails.get("DEATHDATE") : "N/A" %></td>  </tr>

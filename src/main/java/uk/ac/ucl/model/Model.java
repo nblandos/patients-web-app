@@ -6,10 +6,6 @@ import java.util.*;
 
 public class Model
 {
-  // TODO: group by location
-  // TODO: requirements 8 & 9 possibly 10
-  // TODO: use bootstrap and css to make it look nice
-
   private DataFrame dataFrame;
 
   public Model() {
@@ -96,15 +92,13 @@ public class Model
     return patientNames;
   }
 
-  public List<String> getSortedPatientNames(String sortBy, boolean reverseOrder) {
-    List<String> patientNames = getPatientNames();
-
+  private List<String> sortPatientNames(List<String> patientNames, String sortBy, boolean reverseOrder) {
     if (Objects.equals(sortBy, "first-name")) {
-      Collections.sort(patientNames, new FirstNameComparator(dataFrame));
+      patientNames.sort(new FirstNameComparator(dataFrame));
     } else if (Objects.equals(sortBy, "last-name")) {
-      Collections.sort(patientNames, new LastNameComparator(dataFrame));
+      patientNames.sort(new LastNameComparator(dataFrame));
     } else if (Objects.equals(sortBy, "age")) {
-      Collections.sort(patientNames, new AgeComparator(dataFrame));
+      patientNames.sort(new AgeComparator(dataFrame));
     }
 
     if (reverseOrder) {
@@ -114,15 +108,51 @@ public class Model
     return patientNames;
   }
 
+  public Map<String, List<String>> getSortedGroupedPatientNames(String groupBy, String sortBy, boolean reverseOrder) {
+    List<String> allPatientNames = getPatientNames();
+    List<String> sortedPatientNames = sortPatientNames(allPatientNames, sortBy, reverseOrder);
+
+    if (groupBy == null || groupBy.equals("none")) {
+      // no grouping
+      return Collections.singletonMap("", sortedPatientNames);
+    }
+
+    // apply grouping
+    return groupPatientNames(sortedPatientNames, groupBy);
+  }
+
+  private Map<String, List<String>> groupPatientNames(List<String> sortedPatientNames, String groupBy) {
+    Map<String, List<String>> groupedPatients = new HashMap<>();
+
+    for (String patientName : sortedPatientNames) {
+      int patientIndex = dataFrame.getRowIndexFromFullName(patientName);
+      String groupKey = getGroupKey(groupBy, patientIndex);
+
+      if (groupKey != null) {
+        groupedPatients.computeIfAbsent(groupKey, k -> new ArrayList<>()).add(patientName);
+      }
+    }
+
+    return groupedPatients;
+  }
+
+  private String getGroupKey(String groupBy, int patientRow) {
+      return switch (groupBy) {
+          case "gender" -> dataFrame.getValue("GENDER", patientRow);
+          case "city" -> dataFrame.getValue("CITY", patientRow);
+          case "state" -> dataFrame.getValue("STATE", patientRow);
+          case "birthplace" -> dataFrame.getValue("BIRTHPLACE", patientRow);
+          case "race" -> dataFrame.getValue("RACE", patientRow);
+          case "ethnicity" -> dataFrame.getValue("ETHNICITY", patientRow);
+          case null, default -> null;
+      };
+  }
+
   private record FirstNameComparator(DataFrame dataFrame) implements Comparator<String> {
     @Override
       public int compare(String patientName1, String patientName2) {
-        int row1 = dataFrame.getRowIndexFromFullName(patientName1);
-        int row2 = dataFrame.getRowIndexFromFullName(patientName2);
-
-        String firstName1 = dataFrame.getValue("FIRST", row1);
-        String firstName2 = dataFrame.getValue("FIRST", row2);
-
+        String firstName1 = dataFrame.getValueFromPatientName(patientName1, "FIRST");
+        String firstName2 = dataFrame.getValueFromPatientName(patientName2, "FIRST");
         return firstName1.compareToIgnoreCase(firstName2);
       }
     }
@@ -130,11 +160,8 @@ public class Model
   private record LastNameComparator(DataFrame dataFrame) implements Comparator<String> {
     @Override
     public int compare(String patientName1, String patientName2) {
-      int row1 = dataFrame.getRowIndexFromFullName(patientName1);
-      int row2 = dataFrame.getRowIndexFromFullName(patientName2);
-
-      String lastName1 = dataFrame.getValue("LAST", row1);
-      String lastName2 = dataFrame.getValue("LAST", row2);
+      String lastName1 = dataFrame.getValueFromPatientName(patientName1, "LAST");
+      String lastName2 = dataFrame.getValueFromPatientName(patientName2, "LAST");
 
       return lastName1.compareToIgnoreCase(lastName2);
     }
@@ -143,11 +170,8 @@ public class Model
   private record AgeComparator(DataFrame dataFrame) implements Comparator<String> {
     @Override
       public int compare(String patientName1, String patientName2) {
-        int row1 = dataFrame.getRowIndexFromFullName(patientName1);
-        int row2 = dataFrame.getRowIndexFromFullName(patientName2);
-
-        String strDateOfBirth1 = dataFrame.getValue("BIRTHDATE", row1);
-        String strDateOfBirth2 = dataFrame.getValue("BIRTHDATE", row2);
+        String strDateOfBirth1 = dataFrame.getValueFromPatientName(patientName1, "BIRTHDATE");
+        String strDateOfBirth2 = dataFrame.getValueFromPatientName(patientName2, "BIRTHDATE");
 
         try {
           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
