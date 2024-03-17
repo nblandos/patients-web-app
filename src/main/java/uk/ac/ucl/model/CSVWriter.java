@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CSVWriter {
-    private final DataFrame dataFrame;
     private final String csvFilePath;
 
-    public CSVWriter(DataFrame dataFrame, String csvFilePath) {
-        this.dataFrame = dataFrame;
+    public CSVWriter(String csvFilePath) {
         this.csvFilePath = csvFilePath;
     }
 
-    public void writePatientDataToCSV() {
+    public void writePatientDataToCSV(DataFrame dataFrame) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvFilePath))) {
             writer.write(String.join(",", dataFrame.getColumnNames()));
             writer.newLine();

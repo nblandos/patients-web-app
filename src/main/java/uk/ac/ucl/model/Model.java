@@ -7,9 +7,12 @@ import java.util.*;
 
 public class Model {
     private DataFrame dataFrame;
+    private final CSVWriter csvWriter;
+
 
     public Model() {
         this.dataFrame = new DataFrame();
+        this.csvWriter = new CSVWriter(ModelFactory.CSV_FILE_PATH);
     }
 
     public DataFrame getDataFrame() {
@@ -222,8 +225,7 @@ public class Model {
     }
 
     private void writeToCSV() {
-        CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
-        csvWriter.writePatientDataToCSV();
+        csvWriter.writePatientDataToCSV(this.dataFrame);
     }
 
 }
