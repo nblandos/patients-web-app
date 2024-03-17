@@ -110,7 +110,7 @@
         </tr>
     </table>
 
-    <form action="delete-patient.html" method="post">
+    <form action="deletePatient.html" method="post">
         <input type="hidden" name="patientId" value="<%= patientId %>">
         <input type="submit" value="Delete Patient" onclick="return confirm('Are you sure you want to delete <%= patientName %>?')">
     </form>
