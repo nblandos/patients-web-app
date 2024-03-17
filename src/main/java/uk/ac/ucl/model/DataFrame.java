@@ -84,13 +84,7 @@ public class DataFrame {
         for (Map.Entry<String, String> entry : rowData.entrySet()) {
             String columnName = entry.getKey();
             String value = entry.getValue();
-
-            Column column = columns.get(columnName);
-            if (column != null) {
-                column.setRowValue(rowToEdit, value);
-            } else {
-                throw new IllegalArgumentException("Column does not exist: " + columnName);
-            }
+            putValue(columnName, rowToEdit, value);
         }
     }
 

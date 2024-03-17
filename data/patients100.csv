@@ -1,4 +1,5 @@
 ZIP,SUFFIX,DEATHDATE,MAIDEN,MARITAL,STATE,DRIVERS,BIRTHDATE,FIRST,ETHNICITY,BIRTHPLACE,SSN,CITY,PREFIX,LAST,RACE,ADDRESS,GENDER,ID,PASSPORT
+02740,,,Hagenes547,M,Massachusetts,S99951588,1979-08-24,Norah104,french,Hanover  Massachusetts  US,999-46-5746,New Bedford,Mrs.,Stamm704,white,678 Trantow Overpass,F,3e9fd20e-b81c-4698-a7c2-0559e10361fa,X43863756X
 02169,,,,,Massachusetts,,2004-10-11,Galina98,irish,Barnstable Town  Massachusetts  US,999-57-6519,Quincy,,Murray856,white,779 Ledner Road Suite 24,F,ecd13907-7903-4886-a7f5-f6e687c758c4,
 01519,,,Goodwin327,M,Massachusetts,S99930729,1981-02-05,Franchesca574,italian,Worcester  Massachusetts  US,999-96-3731,Grafton,Mrs.,Kuhic920,white,619 Stiedemann Rue Unit 49,F,a1dfeccd-86e4-473b-a4ab-bd613db0dc2f,X83502942X
 01581,,,Blick895,M,Massachusetts,S99995087,1971-08-21,Rosanna866,italian,Quincy  Massachusetts  US,999-96-3303,Westborough,Mrs.,Hudson301,white,812 Donnelly Alley Apt 72,F,af1ee647-2278-4d36-8637-a1d043813116,X43449132X
@@ -11,7 +12,7 @@ ZIP,SUFFIX,DEATHDATE,MAIDEN,MARITAL,STATE,DRIVERS,BIRTHDATE,FIRST,ETHNICITY,BIRT
 02138,,,,M,Massachusetts,S99960152,1979-03-31,Brad867,irish,Williamstown  Massachusetts  US,999-77-5967,Cambridge,Mr.,Anderson154,white,504 Yundt Meadow Suite 79,M,3f620118-1054-412a-8feb-1b10f01fa61c,X25830373X
 01040,,,Cardona494,M,Massachusetts,S99944836,1969-12-30,Marilu588,west_indian,Santo Domingo  National District  DO,999-26-3372,Holyoke,Mrs.,Domínquez36,black,771 O'Conner Common,F,30040a13-4e26-419e-acd2-0164a3e02a18,X41240732X
 01338,,,Wilkinson796,M,Massachusetts,S99933079,1987-04-21,Beula159,irish,Natick  Massachusetts  US,999-53-2793,Buckland,Mrs.,Bernier607,white,472 Schaefer Center Apt 46,F,bf086ba1-188c-48fd-b81a-74ae29b49ffe,X29376428X
-01776,,,,,Massachusetts,,2014-12-22,Petra678,italian,Northampton  Massachusetts  US,999-98-8145,Sudbury,,Pagac496,white,578 Mills Plaza,F,0ad78bf2-dd8e-4dd1-804c-6527c394b2ae,
+01776,N/A,N/A,N/A,N/A,Massachusetts,N/A,2014-12-22,Petra678,italian,Northampton  Massachusetts  US,999-98-8145,Sudbury,N/A,Pagac496,white,578 Mills Plaza,F,0ad78bf2-dd8e-4dd1-804c-6527c394b2ae,N/A
 01913,,,Nader710,M,Massachusetts,S99931423,1969-01-05,Skye332,irish,Rockland  Massachusetts  US,999-45-9405,Amesbury Town,Mrs.,Orn563,white,112 Huel Trafficway,F,ef8b7243-1eee-4bd2-a07c-888127e26175,X33206125X
 01913,,,,M,Massachusetts,S99949646,1956-05-19,Toney527,swedish,Rockland  Massachusetts  US,999-68-4214,Amesbury Town,Mr.,Kemmer137,white,1051 Bayer Common,M,ce4cf349-7435-44c5-b7b5-35f232ef5d12,X7005364X
 01952,,,Gulgowski816,M,Massachusetts,S99946387,1978-01-23,Claudie965,west_indian,Bridgewater  Massachusetts  US,999-46-4575,Salisbury,Mrs.,Luettgen772,black,615 Jacobson Station,F,bbf15b32-fe80-4364-a076-ed386a806e78,X10464819X
@@ -50,7 +51,6 @@ ZIP,SUFFIX,DEATHDATE,MAIDEN,MARITAL,STATE,DRIVERS,BIRTHDATE,FIRST,ETHNICITY,BIRT
 02601,,,Stoltenberg489,M,Massachusetts,S99941247,1918-12-03,Analisa263,polish,Wareham  Massachusetts  US,999-58-6470,Barnstable Town,Mrs.,Rau926,white,190 Shields Annex Unit 72,F,6ea9adf0-8f4d-44ce-8ce0-3658078f0dbf,X89067614X
 02128,,,,,Massachusetts,S99929777,1995-01-14,Elaine830,italian,Westfield  Massachusetts  US,999-11-6240,Winthrop Town,Ms.,Kuphal363,white,297 Hermiston Gardens,F,0cc376be-048f-49bb-af58-2e4f272f4a07,X84445946X
 02474,,,Douglas31,M,Massachusetts,S99982262,1965-04-14,Sammy219,italian,Andover  Massachusetts  US,999-59-7395,Arlington,Mrs.,Harber290,white,818 Greenfelder Highlands Suite 83,F,41362f93-5e34-44c8-a9c5-5c1ac538b999,X20437257X
-01952,,,,,Massachusetts,,2008-04-29,Jody426,italian,Newton  Massachusetts  US,999-35-3497,Salisbury,,Wehner319,white,415 Nikolaus Corner,M,eed41654-93fc-47c4-a42e-47d4cfd4a118,
 02657,,,Bashirian201,M,Massachusetts,S99949438,1948-12-11,Alayna598,italian,Framingham  Massachusetts  US,999-58-4458,Provincetown,Mrs.,Buckridge80,white,691 Mayer Viaduct Suite 28,F,556052da-ad6b-4c39-bb0c-001e78126393,X72036626X
 02108,,,,,Massachusetts,S99922498,1997-05-24,Lani848,scottish,Milton  Massachusetts  US,999-15-2289,Boston,Ms.,O'Connell601,white,859 Lakin Avenue Apt 81,F,f8dc935e-a476-47c8-b4b3-2a6fa97d3d95,X64360639X
 02108,,,,M,Massachusetts,S99979442,1967-06-11,Paul232,italian,Dartmouth  Massachusetts  US,999-54-6754,Boston,Mr.,Hyatt152,white,694 Kub Vale,M,deb75f2a-051f-4cae-81cb-a2592e41dd86,X48036948X
@@ -100,4 +100,3 @@ ZIP,SUFFIX,DEATHDATE,MAIDEN,MARITAL,STATE,DRIVERS,BIRTHDATE,FIRST,ETHNICITY,BIRT
 02108,,,,M,Massachusetts,S99920712,1964-01-22,Jorge203,puerto_rican,Caguas  Puerto Rico  PR,999-80-5129,Boston,Mr.,Amador986,hispanic,838 Borer Road Suite 59,M,b4e9cc9a-6057-46ca-a647-c217ebbca6ee,X3444681X
 02540,,,,S,Massachusetts,S99998950,1963-10-26,William805,italian,Fitchburg  Massachusetts  US,999-75-7299,Falmouth,Mr.,Runte676,white,181 Hessel Bridge,M,02e04306-6dc6-4a93-85bd-40a18eb15d28,X75896505X
 02720,,,,S,Massachusetts,S99957491,1951-12-25,Toby274,italian,North Reading  Massachusetts  US,999-86-1581,Fall River,Mr.,Buckridge80,white,438 O'Reilly Lock Unit 83,M,17e1a347-8e15-4f6c-bf9c-7d7b717cfc73,X31027011X
-,,,,,,,,,,,,,,,,,,asd,
