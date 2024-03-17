@@ -20,10 +20,10 @@ public class Model {
         this.dataFrame = dataLoader.loadData();
     }
 
-    public Map<String, String> getPatientDetails(String patientName) {
+    public Map<String, String> getPatientDetailsFromID(String patientID) {
         Map<String, String> patientDetails = new HashMap<>();
 
-        int rowIndex = dataFrame.getRowIndexFromFullName(patientName);
+        int rowIndex = dataFrame.getRowIndexFromID(patientID);
 
         if (rowIndex != -1) {
             for (String columnName : dataFrame.getColumnNames()) {
@@ -203,6 +203,25 @@ public class Model {
         dataFrame.addRow(patientData);
         CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
         csvWriter.writePatientDataToCSV();
+    }
+
+    public void editPatient(Map<String, String> patientData) {
+        String patientId = patientData.get("ID");
+        int rowToEdit = -1;
+
+        for (int i = 0; i < dataFrame.getRowCount(); i++) {
+            if (dataFrame.getValue("ID", i).equals(patientId)) {
+                rowToEdit = i;
+                break;
+            }
+        }
+
+        if (rowToEdit != -1) {
+            System.out.println("Editing patient with ID: " + patientId);
+            dataFrame.editRow(rowToEdit, patientData);
+            CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
+            csvWriter.writePatientDataToCSV();
+        }
     }
 
 }

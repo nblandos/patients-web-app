@@ -80,6 +80,20 @@ public class DataFrame {
         }
     }
 
+    public void editRow(int rowToEdit, Map<String, String> rowData) {
+        for (Map.Entry<String, String> entry : rowData.entrySet()) {
+            String columnName = entry.getKey();
+            String value = entry.getValue();
+
+            Column column = columns.get(columnName);
+            if (column != null) {
+                column.setRowValue(rowToEdit, value);
+            } else {
+                throw new IllegalArgumentException("Column does not exist: " + columnName);
+            }
+        }
+    }
+
     public List<String> searchByColumnValue(String columnName, String keyword) {
         Column column = columns.get(columnName);
         if (column != null) {
@@ -128,6 +142,17 @@ public class DataFrame {
         int rowIndex = -1;
         for (int i = 0; i < getRowCount(); i++) {
             if (getFullName(i).equals(fullName) && !fullName.equals("N/A")) {
+                rowIndex = i;
+                break;
+            }
+        }
+        return rowIndex;
+    }
+
+    public int getRowIndexFromID(String ID) {
+        int rowIndex = -1;
+        for (int i = 0; i < getRowCount(); i++) {
+            if (getValue("ID", i).equals(ID)) {
                 rowIndex = i;
                 break;
             }

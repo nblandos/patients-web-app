@@ -4,7 +4,6 @@ package uk.ac.ucl.servlets;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +12,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/addPatient.html")
-public class AddPatientServlet extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+@WebServlet("/editPatient.html")
+public class EditPatientServlet extends HttpServlet {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
         Map<String, String> patientData = new HashMap<>();
         patientData.put("ID", request.getParameter("id"));
         patientData.put("BIRTHDATE", request.getParameter("birthdate"));
@@ -39,7 +38,7 @@ public class AddPatientServlet extends HttpServlet {
         patientData.put("ZIP", request.getParameter("zip"));
 
         Model model = ModelFactory.getModel();
-        model.addPatient(patientData);
+        model.editPatient(patientData);
 
         response.sendRedirect("patientList.html");
     }

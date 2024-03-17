@@ -7,9 +7,9 @@
 <jsp:include page="/header.jsp"/>
 <div>
     <h1>Add Patient</h1>
-    <form action="AddPatientServlet" method="post">
+    <form action="addPatient.html" method="post">
         <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id"><br>
+        <input type="text" id="id" name="id" required><br>
         <label for="birthdate">Birth Date:</label><br>
         <input type="text" id="birthdate" name="birthdate"><br>
         <label for="deathdate">Death Date:</label><br>

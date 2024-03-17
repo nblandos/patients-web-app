@@ -13,18 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/patientPage.html")
-public class ViewPatientPageServlet extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+@WebServlet("/editPatientForm.html")
+public class EditPatientFormServlet extends HttpServlet {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String patientId = request.getParameter("patientId");
-
         Model model = ModelFactory.getModel();
-        Map<String, String> patientDetails = model.getPatientDetailsFromID(patientId);
+        Map<String, String> patientData = model.getPatientDetailsFromID(patientId);
 
-        request.setAttribute("patientDetails", patientDetails);
+        if (patientData != null) {
+            for (Map.Entry<String, String> entry : patientData.entrySet()) {
+                request.setAttribute(entry.getKey(), entry.getValue());
+            }
+        }
 
         ServletContext context = getServletContext();
-        RequestDispatcher dispatch = context.getRequestDispatcher("/patientPage.jsp");
+        RequestDispatcher dispatch = context.getRequestDispatcher("/editPatientForm.jsp");
         dispatch.forward(request, response);
     }
 }

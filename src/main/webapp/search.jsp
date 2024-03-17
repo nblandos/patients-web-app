@@ -8,7 +8,7 @@
 <jsp:include page="/header.jsp"/>
 <div class="main">
     <h1>Search</h1>
-    <form method="post" action="${pageContext.request.contextPath}/runsearch.html">
+    <form method="post" action="runsearch.html">
         <label>
             <input type="text" name="search-string" placeholder="Enter search keyword here"/>
         </label>

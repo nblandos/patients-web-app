@@ -115,6 +115,12 @@
         <input type="submit" value="Delete Patient" onclick="return confirm('Are you sure you want to delete <%= patientName %>?')">
     </form>
 
+    <form action="editPatientForm.html" method="get">
+        <input type="hidden" name="patientId" value="<%= patientId %>">
+        <input type="submit" value="Edit Patient">
+    </form>
+
+
     <% } else { %>
     <p>Patient not found.</p>
     <% } %>
