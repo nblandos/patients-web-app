@@ -2,6 +2,7 @@ package uk.ac.ucl.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Model {
@@ -190,7 +191,7 @@ public class Model {
                 LocalDate dateOfBirth2 = LocalDate.parse(strDateOfBirth2, formatter);
 
                 return dateOfBirth1.compareTo(dateOfBirth2);
-            } catch (NumberFormatException ex) {
+            } catch (DateTimeParseException ex) {
                 return 0;
             }
         }

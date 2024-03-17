@@ -22,9 +22,9 @@
         <label for="prefix">Prefix:</label><br>
         <input type="text" id="prefix" name="prefix" value="${PREFIX}"><br>
         <label for="first">First Name:</label><br>
-        <input type="text" id="first" name="first" value="${FIRST}"><br>
+        <input type="text" id="first" name="first" value="${FIRST}" required><br>
         <label for="last">Last Name:</label><br>
-        <input type="text" id="last" name="last" value="${LAST}"><br>
+        <input type="text" id="last" name="last" value="${LAST}" required><br>
         <label for="suffix">Suffix:</label><br>
         <input type="text" id="suffix" name="suffix" value="${SUFFIX}"><br>
         <label for="maiden">Maiden:</label><br>
