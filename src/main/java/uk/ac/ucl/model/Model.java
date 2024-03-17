@@ -215,7 +215,6 @@ public class Model {
         int rowToEdit = dataFrame.getRowIndexFromID(patientId);
 
         if (rowToEdit != -1) {
-            System.out.println("Editing patient with ID: " + patientId);
             dataFrame.editRow(rowToEdit, patientData);
             writeToCSV();
         }
