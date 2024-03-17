@@ -197,14 +197,7 @@ public class Model {
     }
 
     public void deletePatient(String patientId) {
-        int rowToDelete = -1;
-
-        for (int i = 0; i < dataFrame.getRowCount(); i++) {
-            if (dataFrame.getValue("ID", i).equals(patientId)) {
-                rowToDelete = i;
-                break;
-            }
-        }
+        int rowToDelete = dataFrame.getRowIndexFromID(patientId);
 
         if (rowToDelete != -1) {
             dataFrame.deleteRow(rowToDelete);
@@ -219,16 +212,10 @@ public class Model {
 
     public void editPatient(Map<String, String> patientData) {
         String patientId = patientData.get("ID");
-        int rowToEdit = -1;
-
-        for (int i = 0; i < dataFrame.getRowCount(); i++) {
-            if (dataFrame.getValue("ID", i).equals(patientId)) {
-                rowToEdit = i;
-                break;
-            }
-        }
+        int rowToEdit = dataFrame.getRowIndexFromID(patientId);
 
         if (rowToEdit != -1) {
+            System.out.println("Editing patient with ID: " + patientId);
             dataFrame.editRow(rowToEdit, patientData);
             writeToCSV();
         }
