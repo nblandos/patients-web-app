@@ -208,15 +208,13 @@ public class Model {
 
         if (rowToDelete != -1) {
             dataFrame.deleteRow(rowToDelete);
-            CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
-            csvWriter.writePatientDataToCSV();
+            writeToCSV();
         }
     }
 
     public void addPatient(Map<String, String> patientData) {
         dataFrame.addRow(patientData);
-        CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
-        csvWriter.writePatientDataToCSV();
+        writeToCSV();
     }
 
     public void editPatient(Map<String, String> patientData) {
@@ -233,9 +231,13 @@ public class Model {
         if (rowToEdit != -1) {
             System.out.println("Editing patient with ID: " + patientId);
             dataFrame.editRow(rowToEdit, patientData);
-            CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
-            csvWriter.writePatientDataToCSV();
+            writeToCSV();
         }
+    }
+
+    private void writeToCSV() {
+        CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
+        csvWriter.writePatientDataToCSV();
     }
 
 }
