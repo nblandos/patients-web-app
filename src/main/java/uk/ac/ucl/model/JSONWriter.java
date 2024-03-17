@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class JSONWriter {
-    private DataFrame dataFrame;
-    private String filePath;
+    private final DataFrame dataFrame;
+    private final String filePath;
 
     public JSONWriter(DataFrame dataFrame, String csvFilePath) {
         this.dataFrame = dataFrame;

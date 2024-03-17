@@ -15,7 +15,8 @@
             String patientId = patientDetails.get("ID");
             String patientName = patientDetails.get("FIRST") + " " + patientDetails.get("LAST");
     %>
-    <h2><%= patientName %></h2>
+    <h2><%= patientName %>
+    </h2>
     <table>
         <%--displays N/A instead of null if column name does not exist--%>
         <tr>
@@ -112,7 +113,8 @@
 
     <form action="deletePatient.html" method="post">
         <input type="hidden" name="patientId" value="<%= patientId %>">
-        <input type="submit" value="Delete Patient" onclick="return confirm('Are you sure you want to delete <%= patientName %>?')">
+        <input type="submit" value="Delete Patient"
+               onclick="return confirm('Are you sure you want to delete <%= patientName %>?')">
     </form>
 
     <form action="editPatientForm.html" method="get">

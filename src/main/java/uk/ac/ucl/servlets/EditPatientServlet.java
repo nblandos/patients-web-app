@@ -14,7 +14,7 @@ import java.util.Map;
 
 @WebServlet("/editPatient.html")
 public class EditPatientServlet extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, String> patientData = new HashMap<>();
         patientData.put("ID", request.getParameter("id"));
         patientData.put("BIRTHDATE", request.getParameter("birthdate"));

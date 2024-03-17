@@ -1,9 +1,9 @@
 package uk.ac.ucl.servlets;
 
 import uk.ac.ucl.model.DataFrame;
+import uk.ac.ucl.model.JSONWriter;
 import uk.ac.ucl.model.Model;
 import uk.ac.ucl.model.ModelFactory;
-import uk.ac.ucl.model.JSONWriter;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
