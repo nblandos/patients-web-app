@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public class ModelFactory {
     private static Model model;
+    public static final String CSV_FILE_PATH = "data/patients100.csv";
 
     public static Model getModel() throws IOException {
         if (model == null) {
@@ -17,7 +18,7 @@ public class ModelFactory {
             // Note where the data file is stored in the data directory,
             // and the pathname to locate it.
             // The data should be read the file once, not every time the model is accessed!
-            model.loadDataFromCSV("data/patients100.csv");
+            model.loadDataFromCSV(CSV_FILE_PATH);
         }
         return model;
     }

@@ -56,6 +56,30 @@ public class DataFrame {
         }
     }
 
+    public void addRow(Map<String, String> rowData) {
+        for (Map.Entry<String, String> entry : rowData.entrySet()) {
+            String columnName = entry.getKey();
+            String value = entry.getValue();
+
+            Column column = columns.get(columnName);
+            if (column != null) {
+                column.addRowValue(value);
+            } else {
+                throw new IllegalArgumentException("Column does not exist: " + columnName);
+            }
+        }
+    }
+
+    public void deleteRow(int rowToDelete) {
+        if (rowToDelete >= 0 && rowToDelete < getRowCount()) {
+            for (Column column : columns.values()) {
+                column.deleteRowValue(rowToDelete);
+            }
+        } else {
+            throw new IndexOutOfBoundsException("Row index out of bounds: " + rowToDelete);
+        }
+    }
+
     public List<String> searchByColumnValue(String columnName, String keyword) {
         Column column = columns.get(columnName);
         if (column != null) {

@@ -12,10 +12,10 @@
     <%
         Map<String, String> patientDetails = (Map<String, String>) request.getAttribute("patientDetails");
         if (patientDetails != null && !patientDetails.isEmpty()) {
+            String patientId = patientDetails.get("ID");
+            String patientName = patientDetails.get("FIRST") + " " + patientDetails.get("LAST");
     %>
-    <h2><%= patientDetails.get("FIRST") + " " + patientDetails.get("LAST")%>
-    </h2>
-
+    <h2><%= patientName %></h2>
     <table>
         <%--displays N/A instead of null if column name does not exist--%>
         <tr>
@@ -109,6 +109,12 @@
             </td>
         </tr>
     </table>
+
+    <form action="delete-patient.html" method="post">
+        <input type="hidden" name="patientId" value="<%= patientId %>">
+        <input type="submit" value="Delete Patient" onclick="return confirm('Are you sure you want to delete <%= patientName %>?')">
+    </form>
+
     <% } else { %>
     <p>Patient not found.</p>
     <% } %>

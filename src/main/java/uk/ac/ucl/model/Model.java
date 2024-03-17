@@ -5,14 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Model {
-
-    //TODO: Treat ID as primary key instead of full name
-    //TODO: Add the ability to add a new patient row, edit an existing row, or delete a row. The data will need to be saved by writing out a new CSV file.
-    /*TODO: Write a class JSONWriter that given a DataFrame writes out the data to a file in
-    JSON format. The JSON should be well-formed. Add the ability to save to JSON option to the web
-    application.*/
-    //TODO: Add the ability to display graphs or charts to show the data, for example distribution by age.
-
     private DataFrame dataFrame;
 
     public Model() {
@@ -190,5 +182,27 @@ public class Model {
         }
     }
 
+    public void deletePatient(String patientId) {
+        int rowToDelete = -1;
+
+        for (int i = 0; i < dataFrame.getRowCount(); i++) {
+            if (dataFrame.getValue("ID", i).equals(patientId)) {
+                rowToDelete = i;
+                break;
+            }
+        }
+
+        if (rowToDelete != -1) {
+            dataFrame.deleteRow(rowToDelete);
+            CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
+            csvWriter.writePatientDataToCSV();
+        }
+    }
+
+    public void addPatient(Map<String, String> patientData) {
+        dataFrame.addRow(patientData);
+        CSVWriter csvWriter = new CSVWriter(dataFrame, ModelFactory.CSV_FILE_PATH);
+        csvWriter.writePatientDataToCSV();
+    }
 
 }

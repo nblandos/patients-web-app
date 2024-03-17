@@ -36,6 +36,14 @@ public class Column {
         }
     }
 
+    public void deleteRowValue(int rowToRemove) {
+        if (rowToRemove >= 0 && rowToRemove < rows.size()) {
+            rows.remove(rowToRemove);
+        } else {
+            throw new IndexOutOfBoundsException("Row index out of bounds: " + rowToRemove);
+        }
+    }
+
     public void addRowValue(String value) {
         rows.add(value);
     }
