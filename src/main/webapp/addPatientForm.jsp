@@ -23,9 +23,9 @@
         <label for="prefix">Prefix:</label><br>
         <input type="text" id="prefix" name="prefix"><br>
         <label for="first">First Name:</label><br>
-        <input type="text" id="first" name="first"><br>
+        <input type="text" id="first" name="first" required><br>
         <label for="last">Last Name:</label><br>
-        <input type="text" id="last" name="last"><br>
+        <input type="text" id="last" name="last" required><br>
         <label for="suffix">Suffix:</label><br>
         <input type="text" id="suffix" name="suffix"><br>
         <label for="maiden">Maiden:</label><br>

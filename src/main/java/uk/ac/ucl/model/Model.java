@@ -20,6 +20,20 @@ public class Model {
         this.dataFrame = dataLoader.loadData();
     }
 
+    public Map<String, String> getPatientDetails(String patientName) {
+        Map<String, String> patientDetails = new HashMap<>();
+
+        int rowIndex = dataFrame.getRowIndexFromFullName(patientName);
+
+        if (rowIndex != -1) {
+            for (String columnName : dataFrame.getColumnNames()) {
+                String value = getValueWithDefault(columnName, rowIndex);
+                patientDetails.put(columnName, value);
+            }
+        }
+        return patientDetails;
+    }
+
     public Map<String, String> getPatientDetailsFromID(String patientID) {
         Map<String, String> patientDetails = new HashMap<>();
 

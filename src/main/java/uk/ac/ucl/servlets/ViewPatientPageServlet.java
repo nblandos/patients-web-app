@@ -16,10 +16,10 @@ import java.util.Map;
 @WebServlet("/patientPage.html")
 public class ViewPatientPageServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String patientId = request.getParameter("patientId");
+        String patientName = request.getParameter("patient");
 
         Model model = ModelFactory.getModel();
-        Map<String, String> patientDetails = model.getPatientDetailsFromID(patientId);
+        Map<String, String> patientDetails = model.getPatientDetails(patientName);
 
         request.setAttribute("patientDetails", patientDetails);
 
