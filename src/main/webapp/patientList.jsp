@@ -8,6 +8,24 @@
 <head>
     <jsp:include page="/meta.jsp"/>
     <title>Patient Data App</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .content {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .patient-list {
+            margin-right: 100px;
+        }
+
+        .chart-container {
+            width: 600px;
+        }
+
+    </style>
+
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -60,46 +78,87 @@
         <button type="submit" name="apply">Apply</button>
     </form>
 
-    <%
-        Map<String, List<String>> patientData = (Map<String, List<String>>) request.getAttribute("patientNames");
-    %>
+    <div class="content">
 
-    <ul>
-        <% if (patientData.size() == 1 && patientData.containsKey("")) { %>
-        <%
-            // no grouping
-            List<String> patientNames = patientData.get("");
-            for (String patientName : patientNames) {
-                String encodedPatientName = URLEncoder.encode(patientName, StandardCharsets.UTF_8);
-                String href = "patientPage.html?patient=" + encodedPatientName;
-        %>
-        <li><a href="<%=href%>"><%=patientName%>
-        </a></li>
-        <% }
-        %>
-
-        <% } else { %>
-        <%
-            // grouping logic
-            for (Map.Entry<String, List<String>> group : patientData.entrySet()) {
-                int groupCount = group.getValue().size();
-        %>
-        <h3><%= group.getKey() %> (<%= groupCount %>)</h3>
-        <ul>
-            <% for (String patientName : group.getValue()) {
-                String encodedPatientName = URLEncoder.encode(patientName, StandardCharsets.UTF_8);
-                String href = "patientPage.html?patient=" + encodedPatientName;
+        <div class="patient-list">
+            <%
+                Map<String, List<String>> patientData = (Map<String, List<String>>) request.getAttribute("patientNames");
             %>
-            <li><a href="<%=href%>"><%=patientName%>
-            </a></li>
-            <% } %>
-        </ul>
-        <% }
-        %>
-        <% } %>
-    </ul>
 
+            <ul>
+                <% if (patientData.size() == 1 && patientData.containsKey("")) { %>
+                <%
+                    // no grouping
+                    List<String> patientNames = patientData.get("");
+                    for (String patientName : patientNames) {
+                        String encodedPatientName = URLEncoder.encode(patientName, StandardCharsets.UTF_8);
+                        String href = "patientPage.html?patient=" + encodedPatientName;
+                %>
+                <li><a href="<%=href%>"><%=patientName%>
+                </a></li>
+                <% }
+                %>
+
+                <% } else { %>
+                <%
+                    // grouping logic
+                    for (Map.Entry<String, List<String>> group : patientData.entrySet()) {
+                        int groupCount = group.getValue().size();
+                %>
+                <h3><%= group.getKey() %> (<%= groupCount %>)</h3>
+                <ul>
+                    <% for (String patientName : group.getValue()) {
+                        String encodedPatientName = URLEncoder.encode(patientName, StandardCharsets.UTF_8);
+                        String href = "patientPage.html?patient=" + encodedPatientName;
+                    %>
+                    <li><a href="<%=href%>"><%=patientName%>
+                    </a></li>
+                    <% } %>
+                </ul>
+                <% }
+                %>
+                <% } %>
+            </ul>
+        </div>
+
+
+        <div class="chart-container">
+            <%
+                if (!patientData.containsKey("")) {
+            %>
+            <canvas id="chart"></canvas>
+            <script>
+                let labels = [];
+                let counts = [];
+                <%
+                    for (Map.Entry<String, List<String>> group : patientData.entrySet()) {
+                        int groupCount = group.getValue().size();
+                        String fixedKey = group.getKey().replace("'", "\\'");
+                %>
+                labels.push('<%=fixedKey%>');
+                counts.push(<%=groupCount%>);
+                <% } %>
+
+                let ctx = document.getElementById('chart').getContext('2d');
+                let pieChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: counts,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        // maintainAspectRatio: false,
+                    }
+                });
+            </script>
+            <% } %>
+        </div>
+    </div>
 </div>
+
 <jsp:include page="/footer.jsp"/>
 </body>
 </html>
