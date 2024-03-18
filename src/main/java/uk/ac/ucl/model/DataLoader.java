@@ -23,11 +23,9 @@ public class DataLoader {
 
     public DataFrame loadData() {
         DataFrame dataFrame = new DataFrame();
-        Reader reader = null;
 
-        try {
-            reader = new FileReader(filePath);
-            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader());
+        try (Reader reader = new FileReader(filePath);
+            CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
             String[] columnNames = csvParser.getHeaderMap().keySet().toArray(new String[0]);
             for (String columnName : columnNames) {
                 dataFrame.addColumn(columnName);
@@ -37,24 +35,14 @@ public class DataLoader {
                     dataFrame.addValue(columnName, csvRecord.get(columnName));
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + filePath);
-            // if file not found, return empty data frame with default column names
+        }
+        catch (IOException e) {
+            System.err.println("IOException: " + filePath);
+            // if IOException, return empty data frame with default column names
             for (String columnName : DEFAULT_COLUMN_NAMES) {
                 dataFrame.addColumn(columnName);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
         return dataFrame;
     }
 }
