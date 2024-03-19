@@ -21,7 +21,7 @@
         }
 
         .chart-container {
-            width: 600px;
+            width: 700px
         }
 
     </style>
@@ -123,9 +123,6 @@
 
 
         <div class="chart-container">
-            <%
-                if (!patientData.containsKey("")) {
-            %>
             <canvas id="chart"></canvas>
             <script>
                 let labels = [];
@@ -135,8 +132,10 @@
                         int groupCount = group.getValue().size();
                         String fixedKey = group.getKey().replace("'", "\\'");
                 %>
-                labels.push('<%=fixedKey%>');
-                counts.push(<%=groupCount%>);
+                if ("<%=fixedKey%>" !== "") {
+                    labels.push('<%=fixedKey%>');
+                    counts.push(<%=groupCount%>);
+                }
                 <% } %>
 
                 let ctx = document.getElementById('chart').getContext('2d');
@@ -150,11 +149,9 @@
                     },
                     options: {
                         responsive: true,
-                        // maintainAspectRatio: false,
                     }
                 });
             </script>
-            <% } %>
         </div>
     </div>
 </div>
